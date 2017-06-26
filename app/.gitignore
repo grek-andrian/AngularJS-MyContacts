@@ -1,0 +1,8 @@
+.idea
+node_modules
+bower_components
+build
+dist
+npm-debug.log
+karma_html
+tmp
