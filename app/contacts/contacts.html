@@ -1,66 +1,69 @@
 <div class="row" ng-controller="ContactsCtrl">
-
+<div class="large-10 columns">
+  <div data-alert ng-show="msg" class="alert-box">
+    {{msg}}
+  </div>
   <!-- form for adding new contact -->
-     <form ng-submit="contacts.addFormSubmit()" ng-show="addFormShow">
+     <form ng-submit="addFormSubmit()" ng-show="addFormShow">
        <h3>Add Contact</h3>
        <!-- Add Form -->
        <div class="row">
            <div class="large-6 columns">
              <label>Name:
-               <input type="text" ng-model="contacts.name" placeholder="Contact Name" required />
+               <input type="text" ng-model="name" placeholder="Contact Name" required />
              </label>
            </div>
            <div class="large-6 columns">
              <label>Email:
-               <input type="text" ng-model="contacts.email" placeholder="Contact Email" required />
+               <input type="text" ng-model="email" placeholder="Contact Email" required />
              </label>
            </div>
         </div>
         <div class="row">
            <div class="large-6 columns">
              <label>Company:
-               <input type="text" ng-model="contacts.company" placeholder="Company Name" />
+               <input type="text" ng-model="company" placeholder="Company Name" />
              </label>
            </div>
            <div class="large-6 columns">
              <label>Work Phone:
-               <input type="text" ng-model="contacts.work_phone" placeholder="Work Phone" />
+               <input type="text" ng-model="work_phone" placeholder="Work Phone" />
              </label>
            </div>
         </div>
         <div class="row">
            <div class="large-6 columns">
              <label>Mobile Phone:
-               <input type="text" ng-model="contacts.mobile_phone" placeholder="Mobile Phone" />
+               <input type="text" ng-model="mobile_phone" placeholder="Mobile Phone" />
              </label>
            </div>
            <div class="large-6 columns">
              <label>Home Phone:
-               <input type="text" ng-model="contacts.home_phone" placeholder="Home Phone" />
+               <input type="text" ng-model="home_phone" placeholder="Home Phone" />
              </label>
            </div>
         </div>
         <div class="row">
            <div class="large-6 columns">
              <label>Street Address:
-               <input type="text" ng-model="contacts.street_address" placeholder="Street Address" />
+               <input type="text" ng-model="street_address" placeholder="Street Address" />
              </label>
            </div>
            <div class="large-6 columns">
              <label>City:
-               <input type="text" ng-model="contacts.city" placeholder="City" />
+               <input type="text" ng-model="city" placeholder="City" />
              </label>
            </div>
         </div>
         <div class="row">
            <div class="large-6 columns">
              <label>State:
-               <input type="text" ng-model="contacts.state" placeholder="State" />
+               <input type="text" ng-model="state" placeholder="State" />
              </label>
            </div>
            <div class="large-6 columns">
              <label>Zip Code:
-               <input type="text" ng-model="contacts.zipcode" placeholder="Zip Code" />
+               <input type="text" ng-model="zipcode" placeholder="Zip Code" />
              </label>
            </div>
         </div>
@@ -72,7 +75,7 @@
  </form>
 
  <!-- body -->
-<div class="large-10 columns">
+
   <h3>Your contacts {{contacts.length}}</h3>
   <table>
     <thead>
@@ -97,6 +100,7 @@
   </table>
 </div>
 <div class="small-12 large-2 columns">
-  <a class="button large" ng-click="showAddForm()">+</a>
+  <a class="button large" ng-click="showAddForm()" ng-hide="addFormShow">+</a>
+  <a class="button large" ng-click="hide()" ng-show="addFormShow">-</a>
 </div>
 </div>
