@@ -17,9 +17,25 @@ angular.module('myContacts.contacts', ['ngRoute', 'firebase'])
     $scope.addFormShow = true;
   }
 
+  $scope.showEditForm = function(contact){
+    $scope.editFormShow = true;
+    $scope.id = contact.$id;
+    $scope.name = contact.name;
+    $scope.email = contact.email;
+    $scope.company = contact.company;
+    $scope.work_phone = contact.phones[0].work;
+    $scope.mobile_phone = contact.phones[0].mobile;
+    $scope.home_phone = contact.phones[0].home;
+    $scope.street_address = contact.address[0].street;
+    $scope.city = contact.address[0].city;
+    $scope.state = contact.address[0].state;
+    $scope.zipcode = contact.address[0].zipcode;
+  };
+
   $scope.hide = function(){
     $scope.addFormShow = false;
-  }
+    $scope.contactShow = false;
+  };
 
   $scope.addFormSubmit = function(){
     if ($scope.name) { var name = $scope.name;} else {var name = null;}
@@ -31,7 +47,7 @@ angular.module('myContacts.contacts', ['ngRoute', 'firebase'])
     if ($scope.street_address) { var street_address = $scope.street_address;} else {var street_address = null;}
     if ($scope.city) { var city = $scope.city;} else {var city = null;}
     if ($scope.state) { var state = $scope.state;} else {var state = null;}
-    if ($scope.zipcode) { var zipcode = $scope.zipcode;} else {var zipcode = null;}
+    if ($scope.zipcode) { var zipcode = $scope.zipcode;} else {var zipcode = null;};
 
     $scope.contacts.$add({
       name: name,
@@ -57,6 +73,41 @@ angular.module('myContacts.contacts', ['ngRoute', 'firebase'])
       $scope.addFormShow = false;
       $scope.msg = "Contact added";
     });
+  };
+
+  $scope.editFormSubmit = function(){
+    console.log("Hello");
+    var id = $scope.id;
+    var record = $scope.contacts.$getRecord(id);
+    record.name = $scope.name;
+    record.email = $scope.email;
+    record.company = $scope.company;
+    record.phones[0].work = $scope.work_phone;
+    record.phones[0].mobile = $scope.mobile_phone;
+    record.phones[0].home = $scope.home_phone;
+    record.address[0].street = $scope.street_address;
+    record.address[0].city = $scope.city;
+    record.address[0].state = $scope.state;
+    record.address[0].zipcode = $scope.zipcode;
+    $scope.contacts.$save(record).then(function(){console.log(ref.key)}, function(e){console.log(e)});
+    clearFields();
+    $scope.editFormShow =  false;
+    $scope.msg = "Contact edited";
+  };
+
+  $scope.showContact = function(contact){
+    $scope.name = contact.name;
+    $scope.email = contact.email;
+    $scope.company = contact.company;
+    $scope.work_phone = contact.phones[0].work;
+    $scope.mobile_phone = contact.phones[0].mobile;
+    $scope.home_phone = contact.phones[0].home;
+    $scope.street_address = contact.address[0].street;
+    $scope.city = contact.address[0].city;
+    $scope.state = contact.address[0].state;
+    $scope.zipcode = contact.address[0].zipcode;
+
+    $scope.contactShow = true;
   }
 
   function clearFields(){
